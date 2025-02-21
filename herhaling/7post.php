@@ -1,7 +1,10 @@
 <?php
-// session_start();
-// $_SESSION['language'] = $_POST['language'];
-// // header('Location: infoshow.php');
+session_start();
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $_SESSION['language'] = $_POST['language'];
+    header('Location: showinfo.php');
+    exit();
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -11,9 +14,6 @@
     <title>Document</title>
 </head>
 <body>
-    
-<!-- 7.1 -->
-
 
 <form method="POST" action="infoshow.php">
     Geboortedatum: <input type="date" name="birthDay"><br>
@@ -22,6 +22,8 @@
 </form>
 
 <a href="infoshow.php?voornaam=Jan&achternaam=Jansen">Klik hier om je naam door te geven</a>
+
+
 
 </body>
 </html>

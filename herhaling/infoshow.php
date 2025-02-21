@@ -1,7 +1,9 @@
 <?php
-session_start();
+if (isset($_POST['unset'])) {
 unset($_SESSION['language']);
-// header('Location: index.php');
+header('Location: index.php');
+exit();
+}
 ?>
 
 <!DOCTYPE html>
@@ -36,21 +38,23 @@ echo "Achternaam: " . $achternaam . "<br>" . "<br>";
          <option value="Nederlands">Nederlands</option>
         <option value="Engels">Engels</option>
     </select>
-    <button type="submit">Opslaan</button>
+    <button type="submit">submit</button>
 </form>
 
 
 
-<?php if (isset($_SESSION['language'])){ ?>
-        <p>Je voorkeurstaal is: <?php echo "$_SESSION['language']"; ?></p>
-        <form method="post" action="">
+
+
+    <?php if (isset($_SESSION['language'])){ ?>
+        <p>Je voorkeurstaal is: <?php echo htmlspecialchars($_SESSION['language']) ?></p>
+        <?php }else{ ?>
+        <p>Geen voorkeurstaal ingesteld.</p>
+        <a href="7post.php">andere pagina</a>
+    <?php} endif{ ?>
+        <form method="post" action="./7post.php">
             <button type="submit" name="unset">Verwijder voorkeurstaal</button>
         </form>
-        }
-    <?php else{ ?>
-        <p>Geen voorkeurstaal ingesteld.</p>
-        <a href="index.php">Stel voorkeurstaal in</a>
-    <?php }?>
+    <?php } ?>
 
 
 </body>
